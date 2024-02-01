@@ -118,6 +118,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 }
                 if (createDTO == null)
                 {
+                    //return BadRequest(createDTO);
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
@@ -137,6 +138,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 //    Sqft = createDTO.Sqft
                 //};
                 Villa villa = _mapper.Map<Villa>(createDTO);
+                villa.CreatedDate = DateTime.Now;
                 await _dbVilla.CreateAsync(villa);
 
                 _response.Result = _mapper.Map<VillaDTO>(villa);
@@ -153,7 +155,7 @@ namespace MagicVilla_VillaAPI.Controllers
             return _response;
         }
 
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id:int}", Name = "DeleteVilla")]
@@ -190,7 +192,7 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         [HttpPut("{id:int}", Name = "UpdateVilla")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] VillaUpdateDTO updateDTO)
