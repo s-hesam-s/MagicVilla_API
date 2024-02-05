@@ -2,8 +2,8 @@
 
 namespace MagicVilla_Web.Models.Dto
 {
-    public class VillaNumberDTO
-    {
+    public class VillaNumberCreateDTO
+	{
         [Required]
         public int VillaNo { get; set; }
         [Required]
