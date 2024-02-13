@@ -96,6 +96,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     ModelState.AddModelError("ErrorMessages", "Villa Number already Exists!");
 
+                    _response.ErrorMessages = new() { "Villa Number already Exists!" };
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.Result = ModelState;
 
@@ -106,6 +107,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     ModelState.AddModelError("ErrorMessages", "Villa ID is Invalid!");
 
+                    _response.ErrorMessages = new() { "Villa ID is Invalid!" };
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.Result = ModelState;
 
@@ -189,6 +191,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     ModelState.AddModelError("ErrorMessages", "Villa ID is Invalid!");
 
+                    _response.ErrorMessages = new() { "Villa ID is Invalid!" };
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.Result = ModelState;
 
