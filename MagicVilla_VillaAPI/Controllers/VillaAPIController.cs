@@ -109,7 +109,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     //ModelState.AddModelError("CustomError", "Villa already Exists!");
                     //return BadRequest(ModelState);
-                    ModelState.AddModelError("CustomError", "Villa already Exists!");
+                    ModelState.AddModelError("ErrorMessages", "Villa already Exists!");
 
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.Result = ModelState;
