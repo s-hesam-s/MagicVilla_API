@@ -26,6 +26,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 
 builder.Services.AddControllers(option =>
 {
+    option.CacheProfiles.Add("Default30",
+       new CacheProfile()
+       {
+           Duration = 30
+       });
     //option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
@@ -37,7 +42,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 
-builder.Services.AddApiVersioning(options => {
+builder.Services.AddApiVersioning(options =>
+{
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ReportApiVersions = true;
@@ -142,7 +148,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(options => {
+    app.UseSwaggerUI(options =>
+    {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Magic_VillaV1");
         options.SwaggerEndpoint("/swagger/v2/swagger.json", "Magic_VillaV2");
     });
