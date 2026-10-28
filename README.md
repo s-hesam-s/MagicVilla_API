@@ -2,6 +2,14 @@
 
 An educational ASP.NET Core Web API and MVC client for managing villas and villa numbers.
 
+## Captured preview
+
+![MagicVilla · Early API — observed local output](docs/screenshots/portfolio-poster.png)
+
+The existing versioned Villa controller with a strict fixture repository: valid 200, invalid ID 400, missing 404 and sanitized repository failure 500.
+
+[Reproduce this capture and view the static image](docs/PORTFOLIO-PREVIEW.md)
+
 ## Implementation highlights
 
 - Versioned API controllers, DTO mapping, validation, filtering and data access through EF Core repositories.

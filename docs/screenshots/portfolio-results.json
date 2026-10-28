@@ -1,0 +1,26 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/v1/VillaAPI/1",
+    "status": 200,
+    "body": "{\"statusCode\":200,\"isSuccess\":true,\"errorMessages\":[],\"result\":{\"id\":1,\"name\":\"Sample Garden Villa\",\"details\":\"Fixture response from the existing controller\",\"rate\":180,\"occupancy\":4,\"sqft\":650,\"imageUrl\":null,\"amenity\":null}}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/VillaAPI/0",
+    "status": 400,
+    "body": "{\"statusCode\":400,\"isSuccess\":true,\"errorMessages\":[],\"result\":null}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/VillaAPI/55",
+    "status": 404,
+    "body": "{\"statusCode\":404,\"isSuccess\":true,\"errorMessages\":[],\"result\":null}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/VillaAPI/99",
+    "status": 500,
+    "body": "{\"statusCode\":500,\"isSuccess\":false,\"errorMessages\":[\"The request could not be completed.\"],\"result\":null}"
+  }
+]
