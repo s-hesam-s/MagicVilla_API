@@ -1,6 +1,13 @@
 @MagicVilla_VillaAPI_HostAddress = http://localhost:5163
 
-GET {{MagicVilla_VillaAPI_HostAddress}}/weatherforecast/
+### Public versioned read route. Requires the original development host and its configured database.
+GET {{MagicVilla_VillaAPI_HostAddress}}/api/v1/VillaAPI
 Accept: application/json
 
-###
+### Read one villa. The result depends on development data.
+GET {{MagicVilla_VillaAPI_HostAddress}}/api/v1/VillaAPI/1
+Accept: application/json
+
+### Invalid ID: expected 400.
+GET {{MagicVilla_VillaAPI_HostAddress}}/api/v1/VillaAPI/0
+Accept: application/json
