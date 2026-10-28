@@ -50,13 +50,13 @@ namespace MagicVilla_VillaAPI.Controllers.V1
 
                 return Ok(_response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.ErrorMessages = new List<string>() { "The request could not be completed." };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-
-            return _response;
         }
 
         [HttpGet("{id:int}", Name = "GetVillaNumber")]
@@ -84,13 +84,13 @@ namespace MagicVilla_VillaAPI.Controllers.V1
 
                 return Ok(_response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.ErrorMessages = new List<string>() { "The request could not be completed." };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-
-            return _response;
         }
 
         [Authorize(Roles = "admin")]
@@ -139,13 +139,13 @@ namespace MagicVilla_VillaAPI.Controllers.V1
 
                 return CreatedAtRoute("GetVilla", new { id = villaNumber.VillaNo }, _response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.ErrorMessages = new List<string>() { "The request could not be completed." };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-
-            return _response;
         }
 
         [Authorize(Roles = "admin")]
@@ -176,13 +176,13 @@ namespace MagicVilla_VillaAPI.Controllers.V1
 
                 return Ok(_response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.ErrorMessages = new List<string>() { "The request could not be completed." };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-
-            return _response;
         }
 
         [Authorize(Roles = "admin")]
@@ -218,13 +218,13 @@ namespace MagicVilla_VillaAPI.Controllers.V1
 
                 return Ok(_response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.ErrorMessages = new List<string>() { "The request could not be completed." };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-
-            return _response;
         }
     }
 }
