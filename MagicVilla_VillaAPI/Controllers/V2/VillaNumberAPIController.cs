@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+using Asp.Versioning;
+using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace MagicVilla_VillaAPI.Controllers.v2
         protected APIResponse _response;
         private readonly IVillaNumberRepository _dbVillaNumber;
         private readonly IVillaRepository _dbVilla;
-        private readonly IMapper _mapper;
-        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, IMapper mapper,
+        private readonly MappingConfig _mapper;
+        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, MappingConfig mapper,
             IVillaRepository dbVilla)
         {
             _dbVillaNumber = dbVillaNumber;

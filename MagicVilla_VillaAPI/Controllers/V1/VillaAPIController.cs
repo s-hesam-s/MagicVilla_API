@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+using Asp.Versioning;
+using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Logging;
 using MagicVilla_VillaAPI.Models;
@@ -25,10 +26,10 @@ namespace MagicVilla_VillaAPI.Controllers.V1
         //    _logger = logger;
         //}
         private readonly IVillaRepository _dbVilla;
-        private readonly IMapper _mapper;
+        private readonly MappingConfig _mapper;
         protected APIResponse _response;
 
-        public VillaAPIController(IVillaRepository dbVilla, IMapper mapper)
+        public VillaAPIController(IVillaRepository dbVilla, MappingConfig mapper)
         {
             _dbVilla = dbVilla;
             _mapper = mapper;
@@ -66,7 +67,7 @@ namespace MagicVilla_VillaAPI.Controllers.V1
                 Pagination pagination = new() { PageNumber = pageNumber, PageSize = pageSize };
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
 
-                _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
+                _response.Result = _mapper.ToVillaDTOList(villaList);
                 _response.StatusCode = HttpStatusCode.OK;
 
                 return Ok(_response);
@@ -106,7 +107,7 @@ namespace MagicVilla_VillaAPI.Controllers.V1
                     return NotFound(_response);
                 }
 
-                _response.Result = _mapper.Map<VillaDTO>(villa);
+                _response.Result = _mapper.ToVillaDTO(villa);
                 _response.StatusCode = HttpStatusCode.OK;
 
                 return Ok(_response);
@@ -165,11 +166,11 @@ namespace MagicVilla_VillaAPI.Controllers.V1
                 //    Rate = createDTO.Rate,
                 //    Sqft = createDTO.Sqft
                 //};
-                Villa villa = _mapper.Map<Villa>(createDTO);
+                Villa villa = _mapper.ToVilla(createDTO);
                 villa.CreatedDate = DateTime.Now;
                 await _dbVilla.CreateAsync(villa);
 
-                _response.Result = _mapper.Map<VillaDTO>(villa);
+                _response.Result = _mapper.ToVillaDTO(villa);
                 _response.StatusCode = HttpStatusCode.Created;
 
                 return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
@@ -256,7 +257,7 @@ namespace MagicVilla_VillaAPI.Controllers.V1
                 //    Rate = updateDTO.Rate,
                 //    Sqft = updateDTO.Sqft
                 //};
-                Villa model = _mapper.Map<Villa>(updateDTO);
+                Villa model = _mapper.ToVilla(updateDTO);
                 await _dbVilla.UpdateAsync(model);
 
                 _response.StatusCode = HttpStatusCode.NoContent;
@@ -300,7 +301,7 @@ namespace MagicVilla_VillaAPI.Controllers.V1
             //    Rate = villa.Rate,
             //    Sqft = villa.Sqft
             //};
-            VillaUpdateDTO villaDTO = _mapper.Map<VillaUpdateDTO>(villa);
+            VillaUpdateDTO villaDTO = _mapper.ToVillaUpdateDTO(villa);
 
             patchDTO.ApplyTo(villaDTO, ModelState);
 
@@ -320,7 +321,7 @@ namespace MagicVilla_VillaAPI.Controllers.V1
             //    Rate = villaDTO.Rate,
             //    Sqft = villaDTO.Sqft
             //};
-            Villa model = _mapper.Map<Villa>(villaDTO);
+            Villa model = _mapper.ToVilla(villaDTO);
 
             await _dbVilla.UpdateAsync(model);
 

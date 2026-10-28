@@ -1,4 +1,4 @@
-﻿using MagicVilla_VillaAPI.Data;
+using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Models.Dto;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Repository.IRepository;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
+using MagicVilla_VillaAPI;
 using Microsoft.AspNetCore.Identity;
 
 namespace MagicVilla_VillaAPI.Repository
@@ -18,11 +18,11 @@ namespace MagicVilla_VillaAPI.Repository
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IMapper _mapper;
+        private readonly MappingConfig _mapper;
         private string secretKey;
 
         public UserRepository(ApplicationDbContext db, UserManager<ApplicationUser> userManager,
-             RoleManager<IdentityRole> roleManager,IMapper mapper, IConfiguration configuration)
+             RoleManager<IdentityRole> roleManager,MappingConfig mapper, IConfiguration configuration)
         {
             _db = db;
             _mapper = mapper;
@@ -78,7 +78,7 @@ namespace MagicVilla_VillaAPI.Repository
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
             {
                 Token = tokenHandler.WriteToken(token),
-                User = _mapper.Map<UserDTO>(user),
+                User = _mapper.ToUserDTO(user),
             };
             return loginResponseDTO;
         }
@@ -114,7 +114,7 @@ namespace MagicVilla_VillaAPI.Repository
                         await _userManager.DeleteAsync(user);
                         return null;
                     }
-                    return _mapper.Map<UserDTO>(user);
+                    return _mapper.ToUserDTO(user);
                 }
             }
             catch (Exception e)
